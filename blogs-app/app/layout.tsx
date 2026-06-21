@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -5,7 +7,14 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <nav>
+          <Link href="/">home</Link>
+          {" | "}
+          <Link href="/blogs">blogs</Link>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 };
