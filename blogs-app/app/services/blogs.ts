@@ -36,4 +36,13 @@ const blogs = [
   },
 ];
 
+let nextId = blogs.length + 1;
+
 export const getBlogs = () => blogs;
+
+export const addBlog = (
+  title: string,
+  author: string,
+  url: string,
+  likes: number,
+) => blogs.push({ id: nextId++, title, author, url, likes });
