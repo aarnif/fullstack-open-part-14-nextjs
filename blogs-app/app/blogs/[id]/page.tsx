@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBlogById } from "../../services/blogs";
+import { likeBlog } from "@/app/actions/blogs";
 
 const Blogs = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -20,6 +21,10 @@ const Blogs = async ({ params }: { params: Promise<{ id: string }> }) => {
       <p>
         <a href={blog.url}>{blog.url}</a>
       </p>
+      <form action={likeBlog}>
+        <input type="hidden" name="id" value={blog.id} />
+        <button type="submit">Like</button>
+      </form>
     </div>
   );
 };
