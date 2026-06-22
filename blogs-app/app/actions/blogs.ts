@@ -22,3 +22,9 @@ export const likeBlog = async (formData: FormData) => {
   revalidatePath(`/blogs/${id}`);
   revalidatePath("/blogs");
 };
+
+export const filterBlogs = async (formData: FormData) => {
+  const query = formData.get("query") as string;
+  revalidatePath("/blogs");
+  redirect(query ? `/blogs?filter=${query}` : "/blogs");
+};
