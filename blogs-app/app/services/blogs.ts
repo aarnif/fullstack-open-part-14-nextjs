@@ -38,7 +38,7 @@ const blogs = [
 
 let nextId = blogs.length + 1;
 
-export const getBlogs = () => blogs;
+export const getBlogs = () => blogs.toSorted((a, b) => b.likes - a.likes);
 
 export const addBlog = (
   title: string,
