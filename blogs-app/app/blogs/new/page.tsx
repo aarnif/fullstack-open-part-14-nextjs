@@ -1,28 +1,5 @@
-import { HTMLInputTypeAttribute } from "react";
 import { createBlog } from "@/app/actions/blogs";
-
-const capitalize = (word: string) =>
-  word.charAt(0).toUpperCase() + word.slice(1);
-
-const FormField = ({
-  type,
-  name,
-}: {
-  type: HTMLInputTypeAttribute;
-  name: string;
-}) => (
-  <div>
-    <label>
-      {capitalize(name)}
-      <input
-        type={type}
-        name={name}
-        {...(type === "number" && { min: "0" })}
-        required
-      />
-    </label>
-  </div>
-);
+import FormField from "@/app/components/FormField";
 
 const NewBlog = () => (
   <div>
