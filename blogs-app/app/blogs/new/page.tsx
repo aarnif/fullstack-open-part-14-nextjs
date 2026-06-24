@@ -1,5 +1,5 @@
 import { HTMLInputTypeAttribute } from "react";
-import { createBlog } from "../../actions/blogs";
+import { createBlog } from "@/app/actions/blogs";
 
 const capitalize = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1);

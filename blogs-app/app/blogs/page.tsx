@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getBlogs } from "../services/blogs";
-import { filterBlogs } from "../actions/blogs";
+import { getBlogs } from "@/app/services/blogs";
+import { filterBlogs } from "@/app/actions/blogs";
 
 const Blogs = async ({
   searchParams,
