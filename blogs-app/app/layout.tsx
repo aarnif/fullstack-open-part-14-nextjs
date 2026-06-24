@@ -13,6 +13,8 @@ const RootLayout = ({
           {" | "}
           <Link href="/blogs">blogs</Link>
           {" | "}
+          <Link href="/users">users</Link>
+          {" | "}
           <Link href="/blogs/new">new blog</Link>
         </nav>
         {children}
