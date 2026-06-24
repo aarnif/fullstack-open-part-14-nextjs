@@ -1,4 +1,5 @@
 import NavBar from "./components/NavBar";
+import AuthSessionProvider from "./components/SessionProvider";
 
 const RootLayout = ({
   children,
@@ -8,8 +9,10 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body>
-        <NavBar />
-        {children}
+        <AuthSessionProvider>
+          <NavBar />
+          {children}
+        </AuthSessionProvider>
       </body>
     </html>
   );
