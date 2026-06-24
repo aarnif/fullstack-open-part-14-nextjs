@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getBlogById } from "../../services/blogs";
 import { likeBlog } from "@/app/actions/blogs";
 
-const Blogs = async ({ params }: { params: Promise<{ id: string }> }) => {
+const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const blog = await getBlogById(Number(id));
 
@@ -29,4 +29,4 @@ const Blogs = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
 };
 
-export default Blogs;
+export default BlogPage;
