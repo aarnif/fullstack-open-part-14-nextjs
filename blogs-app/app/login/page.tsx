@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormField from "../components/FormField";
 
-export default function LoginPage() {
+const LoginPage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
 
@@ -38,4 +38,6 @@ export default function LoginPage() {
       </form>
     </div>
   );
-}
+};
+
+export default LoginPage;
