@@ -5,17 +5,15 @@ const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
-  return (
-    <html lang="en">
-      <body>
-        <AuthSessionProvider>
-          <NavBar />
-          {children}
-        </AuthSessionProvider>
-      </body>
-    </html>
-  );
-};
+}>) => (
+  <html lang="en">
+    <body>
+      <AuthSessionProvider>
+        <NavBar />
+        {children}
+      </AuthSessionProvider>
+    </body>
+  </html>
+);
 
 export default RootLayout;
