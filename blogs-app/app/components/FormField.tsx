@@ -3,6 +3,14 @@ import { HTMLInputTypeAttribute } from "react";
 const capitalize = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1);
 
+const formatLabel = (name: string) => {
+  const separator = "-";
+  if (name.includes(separator)) {
+    return name.split(separator).map(capitalize).join(" ");
+  }
+  return capitalize(name);
+};
+
 const FormField = ({
   type,
   name,
@@ -14,7 +22,7 @@ const FormField = ({
 }) => (
   <div>
     <label>
-      {capitalize(name)}
+      {formatLabel(name)}
       <input
         type={type}
         name={name}
