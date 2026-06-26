@@ -5,8 +5,10 @@ import { revalidatePath } from "next/cache";
 import { addBlog, addLikeToBlog } from "@/app/services/blogs";
 import { auth } from "@/auth";
 
+const errors: Record<string, string> = {};
+
 export const createBlog = async (
-  _prevState: { error: string },
+  _prevState: { errors: Record<string, string> },
   formData: FormData,
 ) => {
   const session = await auth();
@@ -19,14 +21,20 @@ export const createBlog = async (
   const url = formData.get("url") as string;
   const likes = formData.get("likes") as string;
 
+  Object.keys(errors).forEach((key) => delete errors[key]);
+
   if (!title || title.length < 5) {
-    return { error: "Blog title must be at least 5 characters long" };
+    errors.title = "Blog title must be at least 5 characters long";
   }
   if (!author || author.length < 5) {
-    return { error: "Blog author must be at least 5 characters long" };
+    errors.author = "Blog author must be at least 5 characters long";
   }
   if (!url || url.length < 5) {
-    return { error: "Blog url must be at least 5 characters long" };
+    errors.url = "Blog url must be at least 5 characters long";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return { errors };
   }
 
   await addBlog(title, author, url, Number(likes));

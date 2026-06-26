@@ -5,7 +5,7 @@ import { createBlog } from "@/app/actions/blogs";
 import FormField from "@/app/components/FormField";
 
 const NewBlog = () => {
-  const [state, formAction] = useActionState(createBlog, { error: "" });
+  const [state, formAction] = useActionState(createBlog, { errors: {} });
 
   return (
     <div>
@@ -16,7 +16,15 @@ const NewBlog = () => {
         <FormField type="text" name="url" />
         <FormField type="number" name="likes" />
         <button type="submit">Create</button>
-        {state.error && <p style={{ color: "red" }}>{state.error}</p>}
+        {Object.keys(state.errors).length > 0 && (
+          <>
+            {Object.entries(state.errors).map(([field, error]) => (
+              <p key={field} style={{ color: "red" }}>
+                {error}
+              </p>
+            ))}
+          </>
+        )}
       </form>
     </div>
   );
