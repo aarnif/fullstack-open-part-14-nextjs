@@ -34,7 +34,7 @@ export const createBlog = async (
   }
 
   if (Object.keys(errors).length > 0) {
-    return { errors };
+    return { errors, values: { title, author, url, likes } };
   }
 
   await addBlog(title, author, url, Number(likes));

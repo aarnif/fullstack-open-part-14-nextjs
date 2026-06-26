@@ -6,9 +6,11 @@ const capitalize = (word: string) =>
 const FormField = ({
   type,
   name,
+  defaultValue,
 }: {
   type: HTMLInputTypeAttribute;
   name: string;
+  defaultValue?: string;
 }) => (
   <div>
     <label>
@@ -16,6 +18,7 @@ const FormField = ({
       <input
         type={type}
         name={name}
+        defaultValue={defaultValue}
         {...(type === "number" && { min: "0" })}
         required
       />
