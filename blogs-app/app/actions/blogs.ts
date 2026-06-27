@@ -34,13 +34,17 @@ export const createBlog = async (
   }
 
   if (Object.keys(errors).length > 0) {
-    return { errors, values: { title, author, url, likes } };
+    return { success: false, errors, values: { title, author, url, likes } };
   }
 
   await addBlog(title, author, url, Number(likes));
 
   revalidatePath("/blogs");
-  redirect("/blogs");
+  return {
+    success: true,
+    errors: {},
+    values: { title, author, url, likes },
+  };
 };
 
 export const likeBlog = async (formData: FormData) => {
