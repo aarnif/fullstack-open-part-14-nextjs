@@ -1,31 +1,31 @@
 "use client";
 
-import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+import NavLink from "./NavLink";
 
 const NavBar = () => {
   const { data: session } = useSession();
 
   return (
     <nav>
-      <Link href="/">home</Link>
+      <NavLink href="/">home</NavLink>
       {" | "}
-      <Link href="/blogs">blogs</Link>
+      <NavLink href="/blogs">blogs</NavLink>
       {" | "}
-      <Link href="/users">users</Link>
+      <NavLink href="/users">users</NavLink>
       {" | "}
       {session ? (
         <>
-          <Link href="/blogs/new">new blog</Link>
+          <NavLink href="/blogs/new">new blog</NavLink>
           {" | "}
           <em>{session.user?.name} logged in</em>{" "}
           <button onClick={() => signOut()}>logout</button>
         </>
       ) : (
         <>
-          <Link href="/login">login</Link>
+          <NavLink href="/login">login</NavLink>
           {" | "}
-          <Link href="/register">register</Link>
+          <NavLink href="/register">register</NavLink>
         </>
       )}
     </nav>
