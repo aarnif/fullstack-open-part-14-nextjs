@@ -1,3 +1,4 @@
+import "./globals.css";
 import NavBar from "./components/NavBar";
 import AuthSessionProvider from "./components/SessionProvider";
 
