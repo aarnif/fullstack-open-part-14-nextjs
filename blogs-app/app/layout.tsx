@@ -1,6 +1,8 @@
 import "./globals.css";
-import NavBar from "./components/NavBar";
 import AuthSessionProvider from "./components/SessionProvider";
+import { NotificationProvider } from "./components/NotificationContext";
+import NavBar from "./components/NavBar";
+import Notification from "./components/Notification";
 
 const RootLayout = ({
   children,
@@ -10,8 +12,11 @@ const RootLayout = ({
   <html lang="en">
     <body>
       <AuthSessionProvider>
-        <NavBar />
-        {children}
+        <NotificationProvider>
+          <NavBar />
+          <Notification />
+          {children}
+        </NotificationProvider>
       </AuthSessionProvider>
     </body>
   </html>
