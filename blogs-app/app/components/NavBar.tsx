@@ -15,7 +15,12 @@ const NavBar = () => {
         <NavLink href="/">home</NavLink>
         <NavLink href="/blogs">blogs</NavLink>
         <NavLink href="/users">users</NavLink>
-        {session && <NavLink href="/blogs/new">new blog</NavLink>}
+        {session && (
+          <>
+            <NavLink href="/blogs/new">new blog</NavLink>
+            <NavLink href="/me">me</NavLink>
+          </>
+        )}
       </div>
 
       {session ? (

@@ -2,9 +2,11 @@
 
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import bcrypt from "bcryptjs";
 import { db } from "@/db";
 import { users } from "@/db/schema";
+import { auth } from "@/auth";
 
 const errors: Record<string, string> = {};
 
@@ -46,4 +48,22 @@ export const registerUser = async (
   await db.insert(users).values({ username, name, passwordHash });
 
   redirect("/login");
+};
+
+export const generateToken = async () => {
+  const token = crypto.randomUUID();
+
+  const session = await auth();
+
+  if (!session?.user?.email) {
+    return null;
+  }
+
+  await db
+    .update(users)
+    .set({ token })
+    .where(eq(users.username, session.user.email));
+
+  revalidatePath("/me");
+  redirect("/me");
 };
