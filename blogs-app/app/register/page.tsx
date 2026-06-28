@@ -1,8 +1,8 @@
 "use client";
 
 import { useActionState } from "react";
-import { registerUser } from "../actions/users";
-import FormField from "../components/FormField";
+import { registerUser } from "@/app/actions/users";
+import FormField from "@/app/components/FormField";
 
 const RegisterPage = () => {
   const [state, formAction] = useActionState(registerUser, {
