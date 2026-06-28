@@ -20,18 +20,17 @@ const FormField = ({
   name: string;
   defaultValue?: string;
 }) => (
-  <div>
-    <label>
-      {formatLabel(name)}
-      <input
-        type={type}
-        name={name}
-        defaultValue={defaultValue}
-        {...(type === "number" && { min: "0" })}
-        required
-      />
-    </label>
-  </div>
+  <label className="flex flex-col">
+    {formatLabel(name)}
+    <input
+      className="rounded p-2 dark:bg-slate-800 bg-slate-200 text-slate-700 dark:text-white placeholder:text-slate-500"
+      type={type}
+      name={name}
+      defaultValue={defaultValue}
+      {...(type === "number" && { min: "0" })}
+      required
+    />
+  </label>
 );
 
 export default FormField;
