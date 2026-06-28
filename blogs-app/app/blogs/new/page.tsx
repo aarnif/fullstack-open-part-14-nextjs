@@ -27,17 +27,29 @@ const NewBlog = () => {
     <div>
       <h2 className="text-2xl font-bold mb-4">Create a new blog</h2>
       <form action={formAction} className="max-w-100 flex flex-col gap-4">
-        <FormField type="text" name="title" defaultValue={state.values.title} />
+        <FormField
+          type="text"
+          name="title"
+          defaultValue={state.values.title}
+          placeholder="Blog title"
+        />
         <FormField
           type="text"
           name="author"
           defaultValue={state.values.author}
+          placeholder="Author name"
         />
-        <FormField type="text" name="url" defaultValue={state.values.url} />
+        <FormField
+          type="text"
+          name="url"
+          defaultValue={state.values.url}
+          placeholder="Blog URL"
+        />
         <FormField
           type="number"
           name="likes"
           defaultValue={state.values.likes}
+          placeholder="Number of likes"
         />
         <Button type="submit">Create</Button>
         {Object.keys(state.errors).length > 0 && (

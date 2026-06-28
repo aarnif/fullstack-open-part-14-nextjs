@@ -15,10 +15,12 @@ const FormField = ({
   type,
   name,
   defaultValue,
+  placeholder,
 }: {
   type: HTMLInputTypeAttribute;
   name: string;
   defaultValue?: string;
+  placeholder?: string;
 }) => (
   <label className="flex flex-col">
     {formatLabel(name)}
@@ -27,6 +29,7 @@ const FormField = ({
       type={type}
       name={name}
       defaultValue={defaultValue}
+      placeholder={placeholder}
       {...(type === "number" && { min: "0" })}
       required
     />
