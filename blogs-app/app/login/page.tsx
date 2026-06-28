@@ -3,8 +3,8 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import FormField from "../components/FormField";
-import Button from "../components/Button";
+import FormField from "@/app/components/FormField";
+import Button from "@/app/components/Button";
 
 const LoginPage = () => {
   const router = useRouter();
