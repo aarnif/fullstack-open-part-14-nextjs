@@ -1,32 +1,33 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import NavLink from "./NavLink";
+import Button from "./Button";
 
 const NavBar = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
-    <nav>
-      <NavLink href="/">home</NavLink>
-      {" | "}
-      <NavLink href="/blogs">blogs</NavLink>
-      {" | "}
-      <NavLink href="/users">users</NavLink>
-      {" | "}
+    <nav className="flex justify-between items-center mb-4">
+      <div className="flex items-center gap-4">
+        <NavLink href="/">home</NavLink>
+        <NavLink href="/blogs">blogs</NavLink>
+        <NavLink href="/users">users</NavLink>
+        {session && <NavLink href="/blogs/new">new blog</NavLink>}
+      </div>
+
       {session ? (
-        <>
-          <NavLink href="/blogs/new">new blog</NavLink>
-          {" | "}
+        <div className="flex items-center gap-4">
           <em>{session.user?.name} logged in</em>{" "}
-          <button onClick={() => signOut()}>logout</button>
-        </>
+          <Button onClick={() => signOut()}>logout</Button>
+        </div>
       ) : (
-        <>
-          <NavLink href="/login">login</NavLink>
-          {" | "}
-          <NavLink href="/register">register</NavLink>
-        </>
+        <div className="flex items-center gap-4">
+          <Button onClick={() => router.push("/login")}>login</Button>
+          <Button onClick={() => router.push("/register")}>register</Button>
+        </div>
       )}
     </nav>
   );
