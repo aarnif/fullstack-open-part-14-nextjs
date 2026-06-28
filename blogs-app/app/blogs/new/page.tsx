@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createBlog } from "@/app/actions/blogs";
 import FormField from "@/app/components/FormField";
 import { useNotification } from "@/app/components/NotificationContext";
+import Button from "@/app/components/Button";
 
 const NewBlog = () => {
   const [state, formAction] = useActionState(createBlog, {
@@ -24,8 +25,8 @@ const NewBlog = () => {
 
   return (
     <div>
-      <h2>Create a new blog</h2>
-      <form action={formAction}>
+      <h2 className="text-2xl font-bold mb-4">Create a new blog</h2>
+      <form action={formAction} className="max-w-100 flex flex-col gap-4">
         <FormField type="text" name="title" defaultValue={state.values.title} />
         <FormField
           type="text"
@@ -38,7 +39,7 @@ const NewBlog = () => {
           name="likes"
           defaultValue={state.values.likes}
         />
-        <button type="submit">Create</button>
+        <Button type="submit">Create</Button>
         {Object.keys(state.errors).length > 0 && (
           <>
             {Object.entries(state.errors).map(([field, error]) => (
