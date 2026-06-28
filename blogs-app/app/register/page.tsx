@@ -18,17 +18,25 @@ const RegisterPage = () => {
           type="text"
           name="username"
           defaultValue={state.values.username}
+          placeholder="Choose a username"
         />
-        <FormField type="text" name="name" defaultValue={state.values.name} />
+        <FormField
+          type="text"
+          name="name"
+          defaultValue={state.values.name}
+          placeholder="Enter your full name"
+        />
         <FormField
           type="password"
           name="password"
           defaultValue={state.values.password}
+          placeholder="Choose a password"
         />
         <FormField
           type="password"
           name="password-confirm"
           defaultValue={state.values.passwordConfirm}
+          placeholder="Confirm your password"
         />
         <button type="submit">Register</button>
         {Object.keys(state.errors).length > 0 && (

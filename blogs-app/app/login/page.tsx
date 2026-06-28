@@ -33,8 +33,16 @@ const LoginPage = () => {
       <h2 className="text-2xl font-bold mb-4">Login</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit} className="max-w-100 flex flex-col gap-4">
-        <FormField type="text" name="username" />
-        <FormField type="password" name="password" />
+        <FormField
+          type="text"
+          name="username"
+          placeholder="Enter your username"
+        />
+        <FormField
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+        />
         <Button type="submit">Login</Button>
       </form>
     </div>
