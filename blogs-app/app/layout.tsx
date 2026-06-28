@@ -10,7 +10,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => (
   <html lang="en">
-    <body>
+    <body className="min-h-screen m-4">
       <AuthSessionProvider>
         <NotificationProvider>
           <NavBar />
