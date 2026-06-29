@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { getBlogs } from "@/app/services/blogs";
 import { filterBlogs } from "@/app/actions/blogs";
 import Button from "@/app/components/Button";
+import BlogItem from "@/app/components/BlogItem";
 
 const Blogs = async ({
   searchParams,
@@ -26,22 +26,7 @@ const Blogs = async ({
       </form>
       <ul className="mt-4 flex flex-col gap-2">
         {blogs.map((blog) => (
-          <li
-            key={blog.id}
-            className="rounded dark:even:bg-slate-900 even:bg-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer transition-colors duration-200"
-          >
-            <Link
-              href={`/blogs/${blog.id}`}
-              className="block p-4 cursor-pointer"
-            >
-              <h3 className="text-xl font-bold mb-1">{blog.title}</h3>
-              <p className="mb-3">
-                By <em>{blog.author}</em> — {blog.likes}{" "}
-                {blog.likes === 1 ? "like" : "likes"}
-              </p>
-              <p>{blog.url}</p>
-            </Link>
-          </li>
+          <BlogItem key={blog.id} blog={blog} />
         ))}
       </ul>
     </div>

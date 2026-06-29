@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { getCurrentUser } from "@/app/services/session";
 import { getUsersReadingList } from "@/app/services/users";
 import { generateToken } from "@/app/actions/users";
 import Button from "@/app/components/Button";
+import BlogItem from "@/app/components/BlogItem";
 
 const MyPage = async () => {
   const user = await getCurrentUser();
@@ -45,24 +45,7 @@ const MyPage = async () => {
           <ul className="mt-2 flex flex-col gap-2">
             {readingList.map((item) => {
               const blog = item.blog;
-              return (
-                <li
-                  key={blog.id}
-                  className="rounded dark:even:bg-slate-900 even:bg-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer transition-colors duration-200"
-                >
-                  <Link
-                    href={`/blogs/${blog.id}`}
-                    className="block p-4 cursor-pointer"
-                  >
-                    <h3 className="text-xl font-bold mb-1">{blog.title}</h3>
-                    <p className="mb-3">
-                      By <em>{blog.author}</em> — {blog.likes}{" "}
-                      {blog.likes === 1 ? "like" : "likes"}
-                    </p>
-                    <p>{blog.url}</p>
-                  </Link>
-                </li>
-              );
+              return <BlogItem key={blog.id} blog={blog} />;
             })}
           </ul>
         )}
