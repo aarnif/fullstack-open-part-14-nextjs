@@ -2,6 +2,7 @@ import { ilike, desc, eq, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { blogs, readingList } from "@/db/schema";
 import { getCurrentUser } from "./session";
+import { getUsersReadingList } from "./users";
 
 export const getBlogs = async (query: string) =>
   db.query.blogs.findMany({
@@ -52,4 +53,14 @@ export const addBlogToReadingList = async (id: number) => {
   }
 
   await db.insert(readingList).values({ userId: user.id, blogId: id });
+};
+
+export const isBlogInUsersReadingList = async (id: number) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    return false;
+  }
+
+  const readingList = await getUsersReadingList(user.id);
+  return readingList.some((item) => item.blogId === id);
 };
