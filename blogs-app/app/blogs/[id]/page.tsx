@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { getBlogById } from "@/app/services/blogs";
-import { likeBlog } from "@/app/actions/blogs";
+import { getBlogById, isBlogInUsersReadingList } from "@/app/services/blogs";
+import { likeBlog, addToReadingList } from "@/app/actions/blogs";
 import Button from "@/app/components/Button";
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -10,6 +10,8 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!blog) {
     notFound();
   }
+
+  const isInReadingList = await isBlogInUsersReadingList(blog.id);
 
   return (
     <div>
@@ -24,10 +26,22 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           {blog.url}
         </a>
       </p>
-      <form action={likeBlog}>
-        <input type="hidden" name="id" value={blog.id} />
-        <Button type="submit">Like</Button>
-      </form>
+      <div className="flex gap-4 items-center">
+        <form action={likeBlog}>
+          <input type="hidden" name="id" value={blog.id} />
+          <Button type="submit">Like</Button>
+        </form>
+        {isInReadingList ? (
+          <p className="text-green-600 dark:text-green-400">
+            This blog is in your reading list.
+          </p>
+        ) : (
+          <form action={addToReadingList}>
+            <input type="hidden" name="id" value={blog.id} />
+            <Button type="submit">Add to Reading List</Button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };
