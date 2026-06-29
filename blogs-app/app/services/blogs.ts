@@ -44,3 +44,12 @@ export const addLikeToBlog = async (id: number) => {
       .where(eq(blogs.id, id));
   }
 };
+
+export const addBlogToReadingList = async (id: number) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new Error("Not logged in");
+  }
+
+  await db.insert(readingList).values({ userId: user.id, blogId: id });
+};
