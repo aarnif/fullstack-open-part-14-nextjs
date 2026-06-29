@@ -2,7 +2,11 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { addBlog, addLikeToBlog } from "@/app/services/blogs";
+import {
+  addBlog,
+  addLikeToBlog,
+  addBlogToReadingList,
+} from "@/app/services/blogs";
 import { auth } from "@/auth";
 
 const errors: Record<string, string> = {};
@@ -58,4 +62,11 @@ export const filterBlogs = async (formData: FormData) => {
   const query = formData.get("query") as string;
   revalidatePath("/blogs");
   redirect(query ? `/blogs?filter=${query}` : "/blogs");
+};
+
+export const addToReadingList = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+  await addBlogToReadingList(Number(id));
+  revalidatePath(`/blogs/${id}`);
+  revalidatePath("/blogs");
 };
