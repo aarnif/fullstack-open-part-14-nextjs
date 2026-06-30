@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const BlogItem = ({
   blog,
+  children,
 }: {
   blog: {
     id: number;
@@ -11,8 +12,11 @@ const BlogItem = ({
     url: string;
     userId: number;
   };
+  children?: React.ReactNode;
 }) => (
-  <li className="rounded dark:even:bg-slate-900 even:bg-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer transition-colors duration-200">
+  <li
+    className={`${children ? "relative" : ""} rounded dark:even:bg-slate-900 even:bg-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer transition-colors duration-200`}
+  >
     <Link href={`/blogs/${blog.id}`} className="block p-4 cursor-pointer">
       <h3 className="text-xl font-bold mb-1">{blog.title}</h3>
       <p className="mb-3">
@@ -21,6 +25,7 @@ const BlogItem = ({
       </p>
       <p>{blog.url}</p>
     </Link>
+    {children}
   </li>
 );
 

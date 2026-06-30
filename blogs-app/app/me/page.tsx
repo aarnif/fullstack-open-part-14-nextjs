@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/app/services/session";
 import { getUsersReadingList } from "@/app/services/users";
 import { generateToken } from "@/app/actions/users";
+import { markAsRead } from "@/app/actions/blogs";
 import Button from "@/app/components/Button";
 import BlogItem from "@/app/components/BlogItem";
 
@@ -13,6 +14,9 @@ const MyPage = async () => {
   }
 
   const readingList = await getUsersReadingList(user.id);
+
+  const unreadBlogs = readingList.filter((item) => !item.read);
+  const readBlogs = readingList.filter((item) => item.read);
 
   return (
     <div>
@@ -35,21 +39,43 @@ const MyPage = async () => {
         </div>
         <Button onClick={generateToken}>Generate New Token</Button>
       </div>
-      <div>
-        <h2 className="text-2xl font-bold">Reading List</h2>
-        {readingList.length === 0 ? (
-          <p className="mt-4 text-slate-700 dark:text-slate-300">
-            Your reading list is empty.
-          </p>
-        ) : (
-          <ul className="mt-2 flex flex-col gap-2">
-            {readingList.map((item) => {
-              const blog = item.blog;
-              return <BlogItem key={blog.id} blog={blog} />;
-            })}
-          </ul>
-        )}
-      </div>
+      <h2 className="text-2xl font-bold mb-6">Reading List</h2>
+      {readingList.length === 0 ? (
+        <p className="mt-4 text-slate-700 dark:text-slate-300">
+          Your reading list is empty.
+        </p>
+      ) : (
+        <>
+          <div>
+            <h3 className="text-xl font-bold">Unread ({unreadBlogs.length})</h3>
+            <ul className="mt-2 flex flex-col gap-2">
+              {unreadBlogs.map((item) => {
+                const blog = item.blog;
+                return (
+                  <BlogItem key={blog.id} blog={blog}>
+                    <form
+                      action={markAsRead}
+                      className="absolute right-4 top-1/2 -translate-y-1/2"
+                    >
+                      <input type="hidden" name="id" value={blog.id} />
+                      <Button type="submit">Mark as Read</Button>
+                    </form>
+                  </BlogItem>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="mt-8">
+            <h3 className="text-xl font-bold">Read ({readBlogs.length})</h3>
+            <ul className="mt-2 flex flex-col gap-2">
+              {readBlogs.map((item) => {
+                const blog = item.blog;
+                return <BlogItem key={blog.id} blog={blog} />;
+              })}
+            </ul>
+          </div>
+        </>
+      )}
     </div>
   );
 };
