@@ -6,6 +6,7 @@ import {
   addBlog,
   addLikeToBlog,
   addBlogToReadingList,
+  markBlogAsRead,
 } from "@/app/services/blogs";
 import { auth } from "@/auth";
 
@@ -67,6 +68,13 @@ export const filterBlogs = async (formData: FormData) => {
 export const addToReadingList = async (formData: FormData) => {
   const id = formData.get("id") as string;
   await addBlogToReadingList(Number(id));
+  revalidatePath(`/blogs/${id}`);
+  revalidatePath("/blogs");
+};
+
+export const markAsRead = async (formData: FormData) => {
+  const id = formData.get("id") as string;
+  await markBlogAsRead(Number(id));
   revalidatePath(`/blogs/${id}`);
   revalidatePath("/blogs");
 };

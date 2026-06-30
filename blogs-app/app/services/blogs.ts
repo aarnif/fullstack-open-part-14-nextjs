@@ -1,4 +1,4 @@
-import { ilike, desc, eq, sql } from "drizzle-orm";
+import { ilike, desc, eq, sql, and } from "drizzle-orm";
 import { db } from "@/db";
 import { blogs, readingList } from "@/db/schema";
 import { getCurrentUser } from "./session";
@@ -63,4 +63,16 @@ export const isBlogInUsersReadingList = async (id: number) => {
 
   const readingList = await getUsersReadingList(user.id);
   return readingList.some((item) => item.blogId === id);
+};
+
+export const markBlogAsRead = async (id: number) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new Error("Not logged in");
+  }
+
+  await db
+    .update(readingList)
+    .set({ read: true })
+    .where(and(eq(readingList.blogId, id), eq(readingList.userId, user.id)));
 };
