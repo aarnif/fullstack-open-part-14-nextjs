@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { registerUser } from "@/app/actions/users";
 import FormField from "@/app/components/FormField";
+import Button from "@/app/components/Button";
 
 const RegisterPage = () => {
   const [state, formAction] = useActionState(registerUser, {
@@ -12,8 +13,8 @@ const RegisterPage = () => {
 
   return (
     <div>
-      <h2>Register</h2>
-      <form action={formAction}>
+      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <form action={formAction} className="max-w-100 flex flex-col gap-4">
         <FormField
           type="text"
           name="username"
@@ -38,7 +39,7 @@ const RegisterPage = () => {
           defaultValue={state.values.passwordConfirm}
           placeholder="Confirm your password"
         />
-        <button type="submit">Register</button>
+        <Button type="submit">Register</Button>
         {Object.keys(state.errors).length > 0 && (
           <>
             {Object.entries(state.errors).map(([field, error]) => (
