@@ -1,13 +1,11 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import NavLink from "./NavLink";
 import Button from "./Button";
 
 const NavBar = () => {
   const { data: session } = useSession();
-  const router = useRouter();
 
   return (
     <nav className="flex justify-between items-center mb-4">
@@ -30,8 +28,12 @@ const NavBar = () => {
         </div>
       ) : (
         <div className="flex items-center gap-4">
-          <Button onClick={() => router.push("/login")}>login</Button>
-          <Button onClick={() => router.push("/register")}>register</Button>
+          <NavLink href="/login" variant="primary">
+            login
+          </NavLink>
+          <NavLink href="/register" variant="primary">
+            register
+          </NavLink>
         </div>
       )}
     </nav>
