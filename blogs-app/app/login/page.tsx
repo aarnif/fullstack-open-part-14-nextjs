@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormField from "@/app/components/FormField";
 import Button from "@/app/components/Button";
+import { useNotification } from "../components/NotificationContext";
 
 const LoginPage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+  const { showNotification } = useNotification();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ const LoginPage = () => {
     if (result?.error) {
       setError("Invalid username or password");
     } else {
+      showNotification("login successful");
       router.push("/");
       router.refresh();
     }
