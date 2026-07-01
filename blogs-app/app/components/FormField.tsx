@@ -23,7 +23,7 @@ const FormField = ({
   placeholder?: string;
 }) => (
   <label className="flex flex-col">
-    {formatLabel(name)}
+    {name === "url" ? "URL" : formatLabel(name)}
     <input
       className="rounded p-2 dark:bg-slate-800 bg-slate-200 text-slate-700 dark:text-white placeholder:text-slate-500"
       type={type}

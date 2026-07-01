@@ -11,6 +11,7 @@ const Notification = () => {
 
   return (
     <div
+      data-testid="notification"
       className={`rounded-lg border-2 px-4 py-2.5 my-2.5 font-medium
     ${
       type === "success"

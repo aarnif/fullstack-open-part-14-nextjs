@@ -11,7 +11,7 @@ const NewBlog = () => {
   const [state, formAction] = useActionState(createBlog, {
     success: false,
     errors: {},
-    values: { title: "", author: "", url: "", likes: "" },
+    values: { title: "", author: "", url: "", likes: "0" },
   });
   const { showNotification } = useNotification();
   const router = useRouter();
@@ -51,7 +51,9 @@ const NewBlog = () => {
           defaultValue={state.values.likes}
           placeholder="Number of likes"
         />
-        <Button type="submit">Create</Button>
+        <Button type="submit" data-testid="create-blog-button">
+          Create
+        </Button>
         {Object.keys(state.errors).length > 0 && (
           <>
             {Object.entries(state.errors).map(([field, error]) => (

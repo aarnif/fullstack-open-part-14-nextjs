@@ -14,11 +14,13 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const isInReadingList = await isBlogInUsersReadingList(blog.id);
 
   return (
-    <div>
+    <div data-testid="blog-detail">
       <h2 className="text-2xl font-bold mb-4">Blog</h2>
-      <h3 className="text-xl font-bold mb-1">{blog.title}</h3>
+      <h3 className="text-xl font-bold mb-1" data-testid="blog-title">
+        {blog.title}
+      </h3>
       <p className="mb-3">
-        By <em>{blog.author}</em> — {blog.likes}{" "}
+        By <em data-testid="blog-author">{blog.author}</em> — {blog.likes}{" "}
         {blog.likes === 1 ? "like" : "likes"}
       </p>
       <p className="mb-3">
@@ -38,7 +40,9 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
         ) : (
           <form action={addToReadingList}>
             <input type="hidden" name="id" value={blog.id} />
-            <Button type="submit">Add to Reading List</Button>
+            <Button type="submit" data-testid="add-to-reading-list-button">
+              Add to Reading List
+            </Button>
           </form>
         )}
       </div>

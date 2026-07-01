@@ -35,15 +35,21 @@ const RegisterPage = () => {
         />
         <FormField
           type="password"
-          name="password-confirm"
+          name="confirm-password"
           defaultValue={state.values.passwordConfirm}
           placeholder="Confirm your password"
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit" data-testid="register-button">
+          Register
+        </Button>
         {Object.keys(state.errors).length > 0 && (
           <>
             {Object.entries(state.errors).map(([field, error]) => (
-              <p key={field} style={{ color: "red" }}>
+              <p
+                key={field}
+                style={{ color: "red" }}
+                data-testid={`${field}-error`}
+              >
                 {error}
               </p>
             ))}

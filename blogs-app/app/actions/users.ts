@@ -17,7 +17,7 @@ export const registerUser = async (
   const username = (formData.get("username") as string).trim();
   const name = (formData.get("name") as string).trim();
   const password = formData.get("password") as string;
-  const passwordConfirm = formData.get("password-confirm") as string;
+  const passwordConfirm = formData.get("confirm-password") as string;
 
   Object.keys(errors).forEach((key) => delete errors[key]);
 
