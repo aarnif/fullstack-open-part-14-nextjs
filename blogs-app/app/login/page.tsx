@@ -34,7 +34,11 @@ const LoginPage = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && (
+        <p style={{ color: "red" }} data-testid="error-message">
+          {error}
+        </p>
+      )}
       <form onSubmit={handleSubmit} className="max-w-100 flex flex-col gap-4">
         <FormField
           type="text"
@@ -46,7 +50,9 @@ const LoginPage = () => {
           name="password"
           placeholder="Enter your password"
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit" data-testid="login-button">
+          Login
+        </Button>
       </form>
     </div>
   );

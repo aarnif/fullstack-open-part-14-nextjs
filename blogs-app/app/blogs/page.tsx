@@ -21,10 +21,13 @@ const Blogs = async ({
           name="query"
           defaultValue={filter}
           placeholder="Search blogs by title..."
+          data-testid="filter-input"
         />
-        <Button type="submit">Search</Button>
+        <Button type="submit" data-testid="search-button">
+          Search
+        </Button>
       </form>
-      <ul className="mt-4 flex flex-col gap-2">
+      <ul className="mt-4 flex flex-col gap-2" data-testid="blogs-list">
         {blogs.map((blog) => (
           <BlogItem key={blog.id} blog={blog} />
         ))}
