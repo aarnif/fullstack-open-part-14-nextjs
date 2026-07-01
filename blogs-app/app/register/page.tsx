@@ -35,7 +35,7 @@ const RegisterPage = () => {
         />
         <FormField
           type="password"
-          name="password-confirm"
+          name="confirm-password"
           defaultValue={state.values.passwordConfirm}
           placeholder="Confirm your password"
         />
