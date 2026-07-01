@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/app/services/session";
 import { getUsersReadingList } from "@/app/services/users";
 import { generateToken } from "@/app/actions/users";
@@ -10,7 +10,7 @@ const MyPage = async () => {
   const user = await getCurrentUser();
 
   if (!user) {
-    notFound();
+    redirect("/login");
   }
 
   const readingList = await getUsersReadingList(user.id);
