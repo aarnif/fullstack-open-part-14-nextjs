@@ -11,7 +11,7 @@ const NewBlog = () => {
   const [state, formAction] = useActionState(createBlog, {
     success: false,
     errors: {},
-    values: { title: "", author: "", url: "", likes: "" },
+    values: { title: "", author: "", url: "", likes: "0" },
   });
   const { showNotification } = useNotification();
   const router = useRouter();
